@@ -17,8 +17,19 @@ $save_user=Register::create([
     'password' => $request->password,
 
 ]);
-return['response' => 'User has been saved successfully!'];
+return['User has been saved successfully!'];
 }
-    
     }
+    
+    public function loginUser(Request $request)
+{
+    $user = Register::select('first_name', 'last_name', 'phone_number')
+        ->where('phone_number', $request->phone_number)
+        ->where('password', $request->password)
+        ->get();
+    $data = [
+        'user' => $user,
+    ];
+    return $data;
+}
 }
